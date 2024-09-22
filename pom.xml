@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.pruebas</groupId>
 	<artifactId>ms.productos</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>ms.productos</name>
 	<description>Microservicio productos</description>
 	<url/>

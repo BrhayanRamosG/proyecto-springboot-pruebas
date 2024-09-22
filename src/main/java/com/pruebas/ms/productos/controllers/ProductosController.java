@@ -1,15 +1,16 @@
-package controllers;
+package com.pruebas.ms.productos.controllers;
 
-import models.Producto;
-import models.ProductoRequest;
+import com.pruebas.ms.productos.models.Producto;
+import com.pruebas.ms.productos.models.ProductoRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import services.ProductoService;
+import com.pruebas.ms.productos.services.ProductoService;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(path = "/productos", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -27,8 +28,8 @@ public class ProductosController {
     }
 
     @GetMapping("buscar/{idProducto}")
-    public ResponseEntity<?> obtenerProducto(@PathVariable int idProducto) {
-        Producto producto = productoService.getProductById(idProducto);
+    public ResponseEntity<?> obtenerProducto(@PathVariable int idProducto, @RequestParam Map<String, String> params) {
+        Producto producto = productoService.getProductById(idProducto, params);
         if (producto == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -38,12 +39,12 @@ public class ProductosController {
     @PostMapping("/registrar")
     public ResponseEntity<?> registrarProducto(@RequestBody ProductoRequest request) {
         // TODO Pendiente implementacion
-        return null;
+        return new ResponseEntity<>(request, HttpStatus.OK);
     }
 
-    @DeleteMapping("/eliminar")
-    public ResponseEntity<?> eliminararProducto(@RequestBody ProductoRequest request) {
+    @DeleteMapping("/eliminar/{idProducto}")
+    public ResponseEntity<?> eliminarProducto(@PathVariable int idProducto) {
         // TODO Pendiente implementacion
-        return null;
+        return new ResponseEntity<>(idProducto, HttpStatus.OK);
     }
 }

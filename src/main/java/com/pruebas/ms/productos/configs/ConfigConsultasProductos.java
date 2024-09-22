@@ -1,4 +1,4 @@
-package configs;
+package com.pruebas.ms.productos.configs;
 
 import lombok.Getter;
 import lombok.Setter;

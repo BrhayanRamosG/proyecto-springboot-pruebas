@@ -1,0 +1,43 @@
+name: microservice-productos
+services:
+  app:
+    image: 'productos-service:v1.0.0'
+    build:
+      context: .
+    container_name: productos-service
+    depends_on:
+      - db
+    environment:
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=user
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/productos
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=user
+    ports:
+      - "8080:8080"
+
+  db:
+    container_name: mysql
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: productos
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: user
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: admin
+    ports:
+      - "8082:80"

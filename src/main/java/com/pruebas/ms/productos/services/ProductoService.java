@@ -1,11 +1,12 @@
-package services;
+package com.pruebas.ms.productos.services;
 
-import models.Producto;
+import com.pruebas.ms.productos.models.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repositories.IProductoRepository;
+import com.pruebas.ms.productos.repositories.IProductoRepository;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProductoService implements IProductoService {
@@ -18,7 +19,7 @@ public class ProductoService implements IProductoService {
     }
 
     @Override
-    public Producto getProductById(int id) {
-        return iProductoRepository.findProductoById(id);
+    public Producto getProductById(int id, Map<String,String> params) {
+        return iProductoRepository.findProductoById(id, params);
     }
 }
